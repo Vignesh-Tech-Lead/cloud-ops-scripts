@@ -1,4 +1,4 @@
-# DevOps Automation Scripts
+# Cloud and Operations Scripts
 
 Welcome to my DevOps portfolio! This repository contains a collection of automation scripts, configuration files, and utilities I have developed to streamline Cloud Operations, System Administration, and Infrastructure Monitoring.
 
