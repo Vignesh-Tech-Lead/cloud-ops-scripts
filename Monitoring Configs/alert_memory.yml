@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Alerting - Memory High Usage
+# Description: Prometheus alert rule for memory exhaustion.
+# 
+# Explanation: This file is part of the Monitoring Configs suite. It provides a standardized template for alert_memory.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Include this file in your Prometheus configuration directory and restart the Prometheus service to apply the new alert rules.
+# ==============================================================================
+groups:
+- name: memory_alerts
+  rules:
+  - alert: HighMemoryUsage
+    expr: node_memory_usage > 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High memory usage detected on {{ $labels.instance }}"

@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Cassandra
+# Description: Custom Docker image for cassandra with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.cassandra to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t cassandra-app -f Dockerfile.cassandra .' to build the image locally.
+# ==============================================================================
+FROM cassandra:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-cassandra.conf /etc/cassandra/cassandra.conf
+EXPOSE 8080
+CMD ["cassandra"]

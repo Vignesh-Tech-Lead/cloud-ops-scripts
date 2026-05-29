@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Nginx
+# Description: Custom Docker image for nginx with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.nginx to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t nginx-app -f Dockerfile.nginx .' to build the image locally.
+# ==============================================================================
+FROM nginx:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-nginx.conf /etc/nginx/nginx.conf
+EXPOSE 8080
+CMD ["nginx"]

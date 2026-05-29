@@ -1,0 +1,30 @@
+# ==============================================================================
+# Use Case: Kubernetes Deployment - Postgres
+# Description: Deploys postgres as a scalable pod in Kubernetes.
+# 
+# Explanation: This file is part of the k8s suite. It provides a standardized template for postgres-deployment.yaml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'kubectl apply -f postgres-deployment.yaml' to deploy this resource to your Kubernetes cluster.
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    app: postgres
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:latest
+        ports:
+        - containerPort: 8080

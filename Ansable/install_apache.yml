@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Apache
+# Description: Installs and configures apache on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_apache.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_apache.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install apache
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure apache is installed
+      package:
+        name: "apache"
+        state: present
+    - name: Start apache service
+      service:
+        name: "apache"
+        state: started
+        enabled: yes

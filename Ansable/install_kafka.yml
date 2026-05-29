@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Kafka
+# Description: Installs and configures kafka on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_kafka.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_kafka.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install kafka
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure kafka is installed
+      package:
+        name: "kafka"
+        state: present
+    - name: Start kafka service
+      service:
+        name: "kafka"
+        state: started
+        enabled: yes

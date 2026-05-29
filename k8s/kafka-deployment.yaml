@@ -1,0 +1,30 @@
+# ==============================================================================
+# Use Case: Kubernetes Deployment - Kafka
+# Description: Deploys kafka as a scalable pod in Kubernetes.
+# 
+# Explanation: This file is part of the k8s suite. It provides a standardized template for kafka-deployment.yaml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'kubectl apply -f kafka-deployment.yaml' to deploy this resource to your Kubernetes cluster.
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-deployment
+  labels:
+    app: kafka
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+      - name: kafka
+        image: kafka:latest
+        ports:
+        - containerPort: 8080

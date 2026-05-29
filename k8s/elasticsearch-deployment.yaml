@@ -1,0 +1,30 @@
+# ==============================================================================
+# Use Case: Kubernetes Deployment - Elasticsearch
+# Description: Deploys elasticsearch as a scalable pod in Kubernetes.
+# 
+# Explanation: This file is part of the k8s suite. It provides a standardized template for elasticsearch-deployment.yaml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'kubectl apply -f elasticsearch-deployment.yaml' to deploy this resource to your Kubernetes cluster.
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch-deployment
+  labels:
+    app: elasticsearch
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:latest
+        ports:
+        - containerPort: 8080

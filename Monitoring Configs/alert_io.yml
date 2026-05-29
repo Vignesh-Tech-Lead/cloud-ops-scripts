@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Alerting - Io High Usage
+# Description: Prometheus alert rule for io exhaustion.
+# 
+# Explanation: This file is part of the Monitoring Configs suite. It provides a standardized template for alert_io.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Include this file in your Prometheus configuration directory and restart the Prometheus service to apply the new alert rules.
+# ==============================================================================
+groups:
+- name: io_alerts
+  rules:
+  - alert: HighIoUsage
+    expr: node_io_usage > 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High io usage detected on {{ $labels.instance }}"

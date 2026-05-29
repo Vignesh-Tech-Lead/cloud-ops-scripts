@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Alerting - Network High Usage
+# Description: Prometheus alert rule for network exhaustion.
+# 
+# Explanation: This file is part of the Monitoring Configs suite. It provides a standardized template for alert_network.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Include this file in your Prometheus configuration directory and restart the Prometheus service to apply the new alert rules.
+# ==============================================================================
+groups:
+- name: network_alerts
+  rules:
+  - alert: HighNetworkUsage
+    expr: node_network_usage > 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High network usage detected on {{ $labels.instance }}"

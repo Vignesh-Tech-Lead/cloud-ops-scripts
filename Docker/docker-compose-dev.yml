@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Docker Compose - DEV Environment
+# Description: Multi-container setup for dev testing.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for docker-compose-dev.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker-compose -f docker-compose-dev.yml up -d' to start the environment in the background.
+# ==============================================================================
+version: '3.8'
+services:
+  app:
+    image: myapp:dev
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: dev_db

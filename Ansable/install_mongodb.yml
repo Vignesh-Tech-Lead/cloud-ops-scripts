@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Mongodb
+# Description: Installs and configures mongodb on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_mongodb.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_mongodb.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install mongodb
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure mongodb is installed
+      package:
+        name: "mongodb"
+        state: present
+    - name: Start mongodb service
+      service:
+        name: "mongodb"
+        state: started
+        enabled: yes

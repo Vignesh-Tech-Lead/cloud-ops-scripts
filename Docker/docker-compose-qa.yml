@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Docker Compose - QA Environment
+# Description: Multi-container setup for qa testing.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for docker-compose-qa.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker-compose -f docker-compose-qa.yml up -d' to start the environment in the background.
+# ==============================================================================
+version: '3.8'
+services:
+  app:
+    image: myapp:qa
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: qa_db

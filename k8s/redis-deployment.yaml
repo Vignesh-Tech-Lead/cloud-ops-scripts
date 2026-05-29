@@ -1,0 +1,30 @@
+# ==============================================================================
+# Use Case: Kubernetes Deployment - Redis
+# Description: Deploys redis as a scalable pod in Kubernetes.
+# 
+# Explanation: This file is part of the k8s suite. It provides a standardized template for redis-deployment.yaml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'kubectl apply -f redis-deployment.yaml' to deploy this resource to your Kubernetes cluster.
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deployment
+  labels:
+    app: redis
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+        ports:
+        - containerPort: 8080

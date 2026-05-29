@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Postgres
+# Description: Installs and configures postgres on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_postgres.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_postgres.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install postgres
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure postgres is installed
+      package:
+        name: "postgres"
+        state: present
+    - name: Start postgres service
+      service:
+        name: "postgres"
+        state: started
+        enabled: yes

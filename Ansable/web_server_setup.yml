@@ -1,0 +1,54 @@
+# ==============================================================================
+# Use Case: Configuration Management - Nginx Web Server Setup
+# Description: An Ansible playbook that automates the installation and 
+#              configuration of Nginx on target remote servers.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for web_server_setup.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini web_server_setup.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+---
+- name: Setup Web Servers
+  hosts: webservers
+  become: yes
+  vars:
+    http_port: 80
+
+  tasks:
+    - name: Ensure apt cache is updated
+      apt:
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure Nginx is running and enabled
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Deploy custom index.html
+      copy:
+        content: |
+          <html>
+            <head><title>Managed by Ansible</title></head>
+            <body><h1>This web server was provisioned by Ansible</h1></body>
+          </html>
+        dest: /var/www/html/index.html
+        owner: www-data
+        group: www-data
+        mode: '0644'
+      notify:
+        - Restart Nginx
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted

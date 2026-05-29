@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Docker Compose - SANDBOX Environment
+# Description: Multi-container setup for sandbox testing.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for docker-compose-sandbox.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker-compose -f docker-compose-sandbox.yml up -d' to start the environment in the background.
+# ==============================================================================
+version: '3.8'
+services:
+  app:
+    image: myapp:sandbox
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: sandbox_db

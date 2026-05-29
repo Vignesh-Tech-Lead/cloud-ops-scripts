@@ -1,0 +1,30 @@
+# ==============================================================================
+# Use Case: Kubernetes Deployment - Mysql
+# Description: Deploys mysql as a scalable pod in Kubernetes.
+# 
+# Explanation: This file is part of the k8s suite. It provides a standardized template for mysql-deployment.yaml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'kubectl apply -f mysql-deployment.yaml' to deploy this resource to your Kubernetes cluster.
+# ==============================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    app: mysql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        ports:
+        - containerPort: 8080

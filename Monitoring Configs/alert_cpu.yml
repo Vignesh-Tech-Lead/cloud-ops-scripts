@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Alerting - Cpu High Usage
+# Description: Prometheus alert rule for cpu exhaustion.
+# 
+# Explanation: This file is part of the Monitoring Configs suite. It provides a standardized template for alert_cpu.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Include this file in your Prometheus configuration directory and restart the Prometheus service to apply the new alert rules.
+# ==============================================================================
+groups:
+- name: cpu_alerts
+  rules:
+  - alert: HighCpuUsage
+    expr: node_cpu_usage > 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High cpu usage detected on {{ $labels.instance }}"

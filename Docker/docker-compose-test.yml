@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Docker Compose - TEST Environment
+# Description: Multi-container setup for test testing.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for docker-compose-test.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker-compose -f docker-compose-test.yml up -d' to start the environment in the background.
+# ==============================================================================
+version: '3.8'
+services:
+  app:
+    image: myapp:test
+    ports:
+      - "8080:8080"
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: test_db

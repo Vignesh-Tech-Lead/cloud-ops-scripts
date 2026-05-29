@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Elasticsearch
+# Description: Custom Docker image for elasticsearch with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.elasticsearch to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t elasticsearch-app -f Dockerfile.elasticsearch .' to build the image locally.
+# ==============================================================================
+FROM elasticsearch:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-elasticsearch.conf /etc/elasticsearch/elasticsearch.conf
+EXPOSE 8080
+CMD ["elasticsearch"]

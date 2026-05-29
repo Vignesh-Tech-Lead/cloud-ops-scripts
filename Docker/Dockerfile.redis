@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Redis
+# Description: Custom Docker image for redis with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.redis to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t redis-app -f Dockerfile.redis .' to build the image locally.
+# ==============================================================================
+FROM redis:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-redis.conf /etc/redis/redis.conf
+EXPOSE 8080
+CMD ["redis"]

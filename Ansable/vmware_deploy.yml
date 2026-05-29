@@ -1,0 +1,56 @@
+---
+# ==============================================================================
+# Playbook Name: vmware_deploy.yml
+# Description: Automates the deployment of a virtual machine in a VMware environment.
+# Use Case: Virtualized Infrastructure Deployment
+# Explanation: This playbook uses the vmware_guest module to clone a VM template,
+#              configure networking, and set up the newly deployed VM.
+# How to Use: ansible-playbook vmware_deploy.yml -e "@vars.yml"
+# ==============================================================================
+- name: Deploy Virtual Machine in VMware vCenter
+  hosts: localhost
+  gather_facts: false
+  vars:
+    vcenter_hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+    vcenter_username: "{{ lookup('env', 'VMWARE_USER') }}"
+    vcenter_password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+    vcenter_validate_certs: false
+    datacenter_name: "Primary_Datacenter"
+    cluster_name: "Production_Cluster"
+    template_name: "Ubuntu2204_Template"
+    vm_name: "webserver-01"
+    vm_folder: "/Primary_Datacenter/vm/WebServers"
+    datastore_name: "Datastore_1"
+    network_name: "VM Network"
+
+  tasks:
+    - name: Clone VM from template and configure network
+      community.vmware.vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: "{{ vcenter_validate_certs }}"
+        datacenter: "{{ datacenter_name }}"
+        cluster: "{{ cluster_name }}"
+        name: "{{ vm_name }}"
+        template: "{{ template_name }}"
+        folder: "{{ vm_folder }}"
+        datastore: "{{ datastore_name }}"
+        state: poweredon
+        hardware:
+          memory_mb: 4096
+          num_cpus: 2
+          hotadd_cpu: true
+          hotremove_cpu: true
+          hotadd_memory: true
+        networks:
+          - name: "{{ network_name }}"
+            type: dhcp
+            connected: true
+            start_connected: true
+        wait_for_ip_address: yes
+      register: vm_deploy_info
+
+    - name: Display VM IP address
+      debug:
+        msg: "The VM '{{ vm_name }}' has been deployed with IP: {{ vm_deploy_info.instance.ipv4 }}"

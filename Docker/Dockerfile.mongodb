@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Mongodb
+# Description: Custom Docker image for mongodb with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.mongodb to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t mongodb-app -f Dockerfile.mongodb .' to build the image locally.
+# ==============================================================================
+FROM mongodb:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-mongodb.conf /etc/mongodb/mongodb.conf
+EXPOSE 8080
+CMD ["mongodb"]

@@ -1,0 +1,19 @@
+# ==============================================================================
+# Use Case: Alerting - Latency High Usage
+# Description: Prometheus alert rule for latency exhaustion.
+# 
+# Explanation: This file is part of the Monitoring Configs suite. It provides a standardized template for alert_latency.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Include this file in your Prometheus configuration directory and restart the Prometheus service to apply the new alert rules.
+# ==============================================================================
+groups:
+- name: latency_alerts
+  rules:
+  - alert: HighLatencyUsage
+    expr: node_latency_usage > 90
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High latency usage detected on {{ $labels.instance }}"

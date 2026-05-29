@@ -1,0 +1,20 @@
+# ==============================================================================
+# Use Case: Kubernetes Service - Mongodb
+# Description: Exposes the mongodb deployment internally.
+# 
+# Explanation: This file is part of the k8s suite. It provides a standardized template for mongodb-service.yaml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'kubectl apply -f mongodb-service.yaml' to deploy this resource to your Kubernetes cluster.
+# ==============================================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

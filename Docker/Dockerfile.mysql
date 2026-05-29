@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Mysql
+# Description: Custom Docker image for mysql with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.mysql to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t mysql-app -f Dockerfile.mysql .' to build the image locally.
+# ==============================================================================
+FROM mysql:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-mysql.conf /etc/mysql/mysql.conf
+EXPOSE 8080
+CMD ["mysql"]

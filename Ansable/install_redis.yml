@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Redis
+# Description: Installs and configures redis on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_redis.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_redis.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install redis
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure redis is installed
+      package:
+        name: "redis"
+        state: present
+    - name: Start redis service
+      service:
+        name: "redis"
+        state: started
+        enabled: yes

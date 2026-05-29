@@ -1,0 +1,33 @@
+# ==============================================================================
+# Use Case: CI/CD Pipeline - GitLab CI
+# Description: Multi-stage pipeline defining build, test, and deploy stages.
+# 
+# Explanation: This configuration sets up a GitLab runner environment to execute CI/CD jobs deterministically.
+# 
+# How to Use:
+# Place this in the root of your GitLab repository as .gitlab-ci.yml.
+# ==============================================================================
+stages:
+  - build
+  - test
+  - deploy
+
+build_job:
+  stage: build
+  script:
+    - echo "Building the application..."
+    - make build
+
+test_job:
+  stage: test
+  script:
+    - echo "Running unit tests..."
+    - make test
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploying to production..."
+    - ./deploy.sh
+  only:
+    - main

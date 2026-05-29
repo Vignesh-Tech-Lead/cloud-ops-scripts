@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Elasticsearch
+# Description: Installs and configures elasticsearch on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_elasticsearch.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_elasticsearch.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install elasticsearch
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure elasticsearch is installed
+      package:
+        name: "elasticsearch"
+        state: present
+    - name: Start elasticsearch service
+      service:
+        name: "elasticsearch"
+        state: started
+        enabled: yes

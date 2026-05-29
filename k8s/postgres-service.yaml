@@ -1,0 +1,20 @@
+# ==============================================================================
+# Use Case: Kubernetes Service - Postgres
+# Description: Exposes the postgres deployment internally.
+# 
+# Explanation: This file is part of the k8s suite. It provides a standardized template for postgres-service.yaml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'kubectl apply -f postgres-service.yaml' to deploy this resource to your Kubernetes cluster.
+# ==============================================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+spec:
+  selector:
+    app: postgres
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Postgres
+# Description: Custom Docker image for postgres with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.postgres to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t postgres-app -f Dockerfile.postgres .' to build the image locally.
+# ==============================================================================
+FROM postgres:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-postgres.conf /etc/postgres/postgres.conf
+EXPOSE 8080
+CMD ["postgres"]

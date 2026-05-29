@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Rabbitmq
+# Description: Custom Docker image for rabbitmq with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.rabbitmq to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t rabbitmq-app -f Dockerfile.rabbitmq .' to build the image locally.
+# ==============================================================================
+FROM rabbitmq:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
+EXPOSE 8080
+CMD ["rabbitmq"]

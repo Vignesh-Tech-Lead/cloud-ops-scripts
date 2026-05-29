@@ -1,0 +1,38 @@
+// ==============================================================================
+// Use Case: CI/CD Pipeline - Jenkins
+// Description: Declarative Jenkins pipeline for orchestrating deployments.
+// 
+// Explanation: Defines the stages for a Jenkins CI/CD process, promoting 'Pipeline as Code' best practices.
+// 
+// How to Use:
+// Commit this as 'Jenkinsfile' and point your Jenkins Pipeline job to your repository.
+// ==============================================================================
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'npm test'
+            }
+        }
+        stage('Deploy') {
+            when {
+                branch 'main'
+            }
+            steps {
+                sh './deploy.sh'
+            }
+        }
+    }
+}

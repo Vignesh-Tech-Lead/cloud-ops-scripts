@@ -1,0 +1,50 @@
+# ==============================================================================
+# Use Case: Local Development / Testing Environment Setup
+# Description: Orchestrates a multi-container environment with a web service, 
+#              Redis caching layer, and a PostgreSQL database.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for docker-compose.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker-compose -f docker-compose.yml up -d' to start the environment in the background.
+# ==============================================================================
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - REDIS_HOST=redis
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app-network
+
+  db:
+    image: postgres:14-alpine
+    environment:
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpassword
+      POSTGRES_DB: devdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+volumes:
+  pgdata:
+
+networks:
+  app-network:
+    driver: bridge

@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Rabbitmq
+# Description: Installs and configures rabbitmq on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_rabbitmq.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_rabbitmq.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install rabbitmq
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure rabbitmq is installed
+      package:
+        name: "rabbitmq"
+        state: present
+    - name: Start rabbitmq service
+      service:
+        name: "rabbitmq"
+        state: started
+        enabled: yes

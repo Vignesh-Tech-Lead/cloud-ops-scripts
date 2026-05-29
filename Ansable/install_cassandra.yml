@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Cassandra
+# Description: Installs and configures cassandra on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_cassandra.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_cassandra.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install cassandra
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure cassandra is installed
+      package:
+        name: "cassandra"
+        state: present
+    - name: Start cassandra service
+      service:
+        name: "cassandra"
+        state: started
+        enabled: yes

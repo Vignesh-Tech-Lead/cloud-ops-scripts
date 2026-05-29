@@ -1,0 +1,15 @@
+# ==============================================================================
+# Use Case: Containerize Kafka
+# Description: Custom Docker image for kafka with security hardening.
+# 
+# Explanation: This file is part of the Docker suite. It provides a standardized template for Dockerfile.kafka to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'docker build -t kafka-app -f Dockerfile.kafka .' to build the image locally.
+# ==============================================================================
+FROM kafka:latest
+RUN apt-get update && apt-get upgrade -y \
+    && rm -rf /var/lib/apt/lists/*
+COPY ./custom-kafka.conf /etc/kafka/kafka.conf
+EXPOSE 8080
+CMD ["kafka"]

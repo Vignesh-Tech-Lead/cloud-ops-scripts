@@ -1,0 +1,23 @@
+---
+# ==============================================================================
+# Use Case: Configuration Management - Install Mysql
+# Description: Installs and configures mysql on target nodes.
+# 
+# Explanation: This file is part of the Ansable suite. It provides a standardized template for install_mysql.yml to maintain infrastructure and application reliability.
+# 
+# How to Use:
+# Run 'ansible-playbook -i inventory.ini install_mysql.yml' to apply this configuration to your target nodes.
+# ==============================================================================
+- name: Install mysql
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ensure mysql is installed
+      package:
+        name: "mysql"
+        state: present
+    - name: Start mysql service
+      service:
+        name: "mysql"
+        state: started
+        enabled: yes
