@@ -1,50 +1,50 @@
-# Cloud and Operations Scripts
+# Cloud Ops Scripts
 
-Welcome to my DevOps portfolio! This repository contains a collection of automation scripts, configuration files, and utilities I have developed to streamline Cloud Operations, System Administration, and Infrastructure Monitoring.
+Welcome to my repository for Cloud Operations Scripts. This repository contains a collection of practical operational tooling, automation scripts, and configuration files developed to streamline Cloud Operations, System Administration, and Infrastructure Monitoring.
 
 ## Key Features
-This repository focuses on:
 
-- **Cloud Infrastructure**: AWS EC2 & S3 automation scripts.
-- **Linux Administration**: Automated server patching, user management, and hardening.
-- **Monitoring**: Integrations and setup scripts for Zabbix, Nagios, and PRTG.
-- **Backup & Recovery**: Veeam & Cloudberry backup scheduling scripts.
-- **Security**: Basic auditing and firewall configuration utilities.
+- **Linux Administration & Automation**: Automated server patching, user management, disk monitoring, and log rotation.
+- **Cloud Operations**: AWS EC2 monitoring and S3 automation scripts.
+- **Container Operations**: Docker health checks and deployment configurations.
+- **Monitoring Tooling**: Integrations and setup scripts for comprehensive observability (Zabbix, Nagios).
+- **Backup & Recovery**: Automated scheduling scripts for resilient disaster recovery (Veeam).
 
 ## Project Structure
+
 ```text
 .
-├── Ansable/              # Configuration management playbooks
-├── AWS Deployment Notes/ # Runbooks detailing Standard Operating Procedures
-├── CICD/                 # Continuous Integration and Deployment pipelines
-├── Docker/               # Dockerfiles and docker-compose configurations
-├── k8s/                  # Kubernetes orchestration manifests
-├── Linux Scripts/        # Bash scripts for routine maintenance and backups
-├── Monitoring Configs/   # Configurations for Zabbix, Nagios, PRTG, etc.
-└── Terraform/            # Infrastructure as Code modules for AWS
+├── ansible-playbooks/       # Configuration management playbooks for automated provisioning
+├── aws-deployment-runbooks/ # Standard Operating Procedures (SOPs) for AWS deployments
+├── cicd-pipelines/          # Continuous Integration and Deployment pipeline configurations
+├── docker-configs/          # Dockerfiles, health checks, and docker-compose definitions
+├── k8s/                     # Kubernetes orchestration manifests
+├── linux-scripts/           # Practical Bash scripts for routine operations and maintenance
+├── monitoring-configs/      # Operational configurations for Zabbix, Nagios, etc.
+└── terraform-modules/       # Infrastructure as Code modules for AWS environments
 ```
 
 ## Tech Stack
 - **OS**: Linux (RHEL, Ubuntu), Windows Server
 - **Cloud**: AWS (EC2, IAM, S3)
-- **Tools**: Bash, Docker (Basic), Git, Veeam
+- **Containerization**: Docker, Kubernetes
+- **Automation**: Bash, Ansible, Terraform
 - **Monitoring**: Zabbix, Nagios
 
 ## Usage
-To use any of these scripts, clone the repository and ensure you have the necessary permissions:
+
+Clone the repository to deploy these operational tools in your environment:
 
 ```bash
-git clone https://github.com/Vignesh-Tech-Lead/DevOps-Scripts.git
-cd DevOps-Scripts
-chmod +x "Linux Scripts/"*.sh
+git clone https://github.com/Vignesh-Tech-Lead/cloud-ops-scripts.git
+cd cloud-ops-scripts
+chmod +x linux-scripts/*.sh
 ```
 
-## Contributing
-This is a personal portfolio project, but suggestions and improvements are welcome!
+Many scripts are designed to be run via `cron` for automated scheduling. Refer to individual script comments for recommended cron expressions.
 
 ## Author
 **Vignesh M**
 
 - **Role**: Cloud Operations Engineer | DevOps Support | Senior System Administrator
 - **Email**: mvignesh479@gmail.com
-
